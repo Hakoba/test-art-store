@@ -1,0 +1,77 @@
+@font-face {
+  font-weight: normal;
+  font-family: 'Merriweather';
+  font-style: normal;
+  src: local('Merriweather Regular'), local('Merriweather-Regular'),
+  url('../fonts/Merriweather/Merriweather-Regular.ttf') format('ttf');
+  /*url('./src/assets/fonts/Merriweather/Merriweather-Regular.ttf') format(
+  'ttf'
+  );*/
+}
+
+@font-face {
+  font-weight: 300;
+  font-family: 'Merriweather';
+  font-style: normal;
+  src: local('Merriweather Light'), local('Merriweather-Light'),
+  url('../fonts/Merriweather/Merriweather-Light.ttf') format('ttf');
+}
+
+@font-face {
+  font-weight: bold;
+  font-family: 'Merriweather';
+  font-style: normal;
+  src: local('Merriweather Bold'), local('Merriweather-Bold'),
+  url('../fonts/Merriweather/Merriweather-Bold.ttf') format('ttf');
+}
+
+html {
+  font-weight: normal;
+  font-size: 14px;
+  font-family: 'Merriweather', sans-serif;
+  font-style: normal;
+  line-height: 150%;
+}
+
+h1,
+.h1 {
+  font-style: normal;
+  font-weight: bold;
+  font-size: 24px;
+}
+
+h2,
+.h2 {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+}
+
+h3,
+.h3 {
+  font-weight: bold;
+  font-size: 16px;
+}
+
+
+h4,
+.h4 {
+
+  font-weight: bold;
+  font-size: 16px;
+}
+
+
+h5,
+.h5 {
+  font-weight: normal;
+  font-size: 14px;
+}
+
+
+h6,
+.h6 {
+  font-weight: 300;
+  font-size: 14px;
+}
+

@@ -1,24 +1,27 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import Home from "../views/Home.vue";
-
+import  mainLayout from "../components/layouts/MainLayout"
+const prefix = 'Art store: '
 Vue.use(VueRouter);
 
 const routes = [
   {
     path: "/",
-    name: "Home",
-    component: Home,
+    name: "MainLayout",
+    redirect: 'gallery',
+    component: mainLayout,
+    children:[
+      {
+        path: "gallery",
+        name: "GalleryView",
+        meta: {
+          title: prefix + "Кабинет"
+        },
+        component: () => import("@/components/views/GalleryView.vue")
+      },
+    ]
   },
-  {
-    path: "/about",
-    name: "About",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () =>
-      import(/* webpackChunkName: "about" */ "../views/About.vue"),
-  },
+
 ];
 
 const router = new VueRouter({

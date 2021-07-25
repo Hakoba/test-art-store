@@ -1,0 +1,19 @@
+@import "reset";
+@import "colors";
+@import "typo";
+body{
+  color: var(--color-text);
+  background: var(--color-bg);
+}
+.container{
+
+  width: 1200px;
+  position: relative;
+  max-width: calc(100% - 80px);
+  margin: 0 auto;
+}
+hr, .hr{
+  margin: 0;
+  border-bottom: none;
+  border-top: 1px solid var(--color-border);
+}
