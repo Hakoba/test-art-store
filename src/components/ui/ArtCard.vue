@@ -32,7 +32,7 @@
           :icon="picture.inCart ? 'check' : false"
           :done="picture.inCart"
         >
-          {{ picture.inCart ? "В корзине" : "Купить" }}</art-button
+          {{ buttonText }}</art-button
         >
       </div>
     </div>
@@ -60,7 +60,11 @@ export default {
       isLoading: false,
     };
   },
-
+  computed:{
+    buttonText(){
+      return this.isLoading ? 'Загрузка' : this.picture.inCart ? "В корзине" : "Купить"
+    }
+  },
   methods: {
     ...mapActions({
       togglePictureAsync: "getPosts",
@@ -74,7 +78,6 @@ export default {
         const updatedPicture = JSON.parse(
           JSON.stringify({ ...this.picture, inCart: !this.picture.inCart })
         );
-        console.log("updatedPic", updatedPicture);
         this.updatePictureState({ index: this.index, data: updatedPicture });
       } catch (e) {
         console.warn(e);
