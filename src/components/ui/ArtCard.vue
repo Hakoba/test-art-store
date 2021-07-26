@@ -1,28 +1,40 @@
 <template>
-  <div class="art-card" >
-    <div class="art-card__overlay" :class="{'art-card__overlay_sold': picture.sold}"></div>
+  <div class="art-card">
+    <div
+      class="art-card__overlay"
+      :class="{ 'art-card__overlay_sold': picture.sold }"
+    ></div>
     <div class="art-card__image">
-        <img :src="require(`@/assets/images/${picture.slug}.png`)" alt="">
+      <img :src="require(`@/assets/images/${picture.slug}.png`)" alt="" />
     </div>
     <div class="art-card__body">
-      <h2 class="art-card__text" v-show="picture.name">
-        «{{picture.name}}»
-      </h2>
+      <h2 class="art-card__text" v-show="picture.name">«{{ picture.name }}»</h2>
       <h2 class="art-card__text">
-        {{picture.author}}
+        {{ picture.author }}
       </h2>
     </div>
     <div class="art-shop art-card__actions">
-        <h3 class="art-shop__sold-info" v-if="picture.sold">Продана на аукционе</h3>
-        <div class="art-shop__main" v-else>
-            <div class="art-shop__price-container" >
-              <h3 class="art-shop__old-price" v-if="picture.oldPrice">{{picture.oldPrice.toLocaleString()}} $</h3>
-              <h3 class="art-shop__current-price">{{picture.price.toLocaleString()}} $</h3>
-            </div>
-            <art-button @click="togglePictureCartState()" :loading="isLoading" :icon="picture.inCart ? 'check': false" :done="picture.inCart" >
-
-              {{ picture.inCart ? 'В корзине' : 'Купить'  }}</art-button>
+      <h3 class="art-shop__sold-info" v-if="picture.sold">
+        Продана на аукционе
+      </h3>
+      <div class="art-shop__main" v-else>
+        <div class="art-shop__price-container">
+          <h3 class="art-shop__old-price" v-if="picture.oldPrice">
+            {{ picture.oldPrice.toLocaleString() }} $
+          </h3>
+          <h3 class="art-shop__current-price">
+            {{ picture.price.toLocaleString() }} $
+          </h3>
         </div>
+        <art-button
+          @click="togglePictureCartState()"
+          :loading="isLoading"
+          :icon="picture.inCart ? 'check' : false"
+          :done="picture.inCart"
+        >
+          {{ picture.inCart ? "В корзине" : "Купить" }}</art-button
+        >
+      </div>
     </div>
   </div>
 </template>
@@ -33,59 +45,55 @@ import { mapActions, mapMutations } from "vuex";
 export default {
   components: { ArtButton },
   name: "ArtCard.vue",
-  props:{
+  props: {
     picture: {
       type: Object,
-      require: true
+      require: true,
     },
-    index:{
+    index: {
       type: Number,
-      require: true
-    }
+      require: true,
+    },
   },
-  data(){
-    return{
-      isLoading: false
-    }
+  data() {
+    return {
+      isLoading: false,
+    };
   },
 
-  methods:{
+  methods: {
     ...mapActions({
-      togglePictureAsync: 'getPosts'
+      togglePictureAsync: "getPosts",
     }),
-    ...mapMutations(['updatePictureState']),
+    ...mapMutations(["updatePictureState"]),
 
-    async togglePictureCartState(){
+    async togglePictureCartState() {
       this.isLoading = true;
       try {
-
         await this.togglePictureAsync();
-        const updatedPicture =  JSON.parse(JSON.stringify({...this.picture, inCart: !this.picture.inCart}))
-        console.log('updatedPic',updatedPicture)
-        this.updatePictureState({index: this.index,data: updatedPicture})
-      }
-      catch (e) {
-        console.warn(e)
-      }
-      finally {
+        const updatedPicture = JSON.parse(
+          JSON.stringify({ ...this.picture, inCart: !this.picture.inCart })
+        );
+        console.log("updatedPic", updatedPicture);
+        this.updatePictureState({ index: this.index, data: updatedPicture });
+      } catch (e) {
+        console.warn(e);
+      } finally {
         this.isLoading = false;
       }
-
-
-    }
-
+    },
   },
 };
 </script>
 
 <style scoped lang="scss">
-.art-card{
+.art-card {
   position: relative;
-  &__overlay{
+  &__overlay {
     display: none;
-    &_sold{
+    &_sold {
       display: block;
-      background-color: rgba(255,255,255,0.4);
+      background-color: rgba(255, 255, 255, 0.4);
       position: absolute;
       left: 0;
       right: 0;
@@ -96,37 +104,33 @@ export default {
   }
   border: 1px solid var(--color-border);
   width: 280px;
-  &__image{
-
+  &__image {
   }
-  &__body{
-    margin:   20px 24px;
-
+  &__body {
+    margin: 20px 24px;
   }
-  &__actions{
+  &__actions {
     margin: 26px 20px;
   }
 }
-.art-shop{
-  &__sold-info{
+.art-shop {
+  &__sold-info {
     padding-top: 10px;
   }
-  &__main{
+  &__main {
     display: flex;
     justify-content: space-between;
     align-items: stretch;
-
   }
-  &__price-container{
+  &__price-container {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
   }
-  &__old-price{
+  &__old-price {
     text-decoration: line-through;
-    color: #A0A0A0;
+    color: #a0a0a0;
   }
 }
-
 </style>

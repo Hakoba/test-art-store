@@ -1,12 +1,11 @@
 <template>
   <div>
     <art-header></art-header>
-    <hr>
+    <hr />
     <main class="home container">
       <router-view></router-view>
     </main>
     <art-footer></art-footer>
-
   </div>
 </template>
 
@@ -15,25 +14,20 @@ import ArtHeader from "../ui/ArtHeader";
 import ArtFooter from "../ui/ArtFooter";
 
 export default {
-  components:{
+  components: {
     ArtHeader,
-    ArtFooter
+    ArtFooter,
   },
 
   name: "MainLaylout",
-
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
 .home {
-
 }
 
 .home__container {
-
 }
-
-
 </style>

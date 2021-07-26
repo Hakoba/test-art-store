@@ -17,3 +17,14 @@ hr, .hr{
   border-bottom: none;
   border-top: 1px solid var(--color-border);
 }
+.list-item {
+  display: inline-block;
+  margin-right: 10px;
+}
+.list-enter-active, .list-leave-active {
+  transition: all 0.15s;
+}
+.list-enter, .list-leave-to{
+  opacity: 0;
+  transform: translateY(30px);
+}

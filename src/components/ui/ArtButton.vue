@@ -1,15 +1,24 @@
 <template>
- <button class="art-button" @click="$emit('click')" :disabled="loading" :class="{'art-button_done': done}">
-   <div class="art-button__icon" v-if="(hasIcon || icon) && !loading">
-   <slot  name="icon">
-     <img class="art-button__image" :src="require(`@/assets/icons/${icon}.svg`)" alt="">
-   </slot>
-   </div>
-   <span class="art-button__icon" v-else-if="loading">
-     <img class="art-button__image" src="@/assets/icons/loader.svg" alt="">
-   </span>
-     <slot>
- </slot></button>
+  <button
+    class="art-button"
+    @click="$emit('click')"
+    :disabled="loading"
+    :class="{ 'art-button_done': done }"
+  >
+    <div class="art-button__icon" v-if="(hasIcon || icon) && !loading">
+      <slot name="icon">
+        <img
+          class="art-button__image"
+          :src="require(`@/assets/icons/${icon}.svg`)"
+          alt=""
+        />
+      </slot>
+    </div>
+    <span class="art-button__icon" v-else-if="loading">
+      <img class="art-button__image" src="@/assets/icons/loader.svg" alt="" />
+    </span>
+    <slot> </slot>
+  </button>
 </template>
 
 <script>
@@ -19,32 +28,32 @@ export default {
     done: {
       type: Boolean,
       required: false,
-      default: false
+      default: false,
     },
-    loading:  {
+    loading: {
       type: Boolean,
       required: false,
-      default: false
+      default: false,
     },
     icon: {
-      type: [String,Boolean],
-      required:false,
+      type: [String, Boolean],
+      required: false,
       validator: function (value) {
-        return ['check', false].indexOf(value) !== -1
+        return ["check", false].indexOf(value) !== -1;
       },
-    }
+    },
   },
-  computed:{
-    hasIcon(){
-      return this.$slots.icon
-    }
-  }
+  computed: {
+    hasIcon() {
+      return this.$slots.icon;
+    },
+  },
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-.art-button{
+.art-button {
   background-color: var(--button-main);
   display: inline-flex;
   align-items: center;
@@ -53,26 +62,25 @@ export default {
   height: 48px;
   border: none;
   transition: background-color linear 0.15s;
-  &:hover{
+  &:hover {
     background-color: #776763;
   }
-  &:disabled{
-    background: #C1B4B1;
+  &:disabled {
+    background: #c1b4b1;
   }
-  &__image{
+  &__image {
     display: inline;
   }
-  &__icon{
-      display: inline-block;
+  &__icon {
+    display: inline-block;
     width: 20px;
     height: 20px;
     position: relative;
     left: -4px;
-    }
-  &_done{
+  }
+  &_done {
     padding: 10px;
     background-color: var(--button-secondary);
   }
-
 }
 </style>

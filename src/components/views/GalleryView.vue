@@ -2,46 +2,52 @@
   <section class="art-gallery">
     <div class="art-gallery__container">
       <h1 class="art-gallery__title">Картины эпохи возраждения</h1>
-      <div class="art-gallery__cards">
-        <art-card :picture="picture" :index="index" v-for="(picture, index) in pictures" :key="picture.id"></art-card>
-      </div>
+      <transition-group name="list" class="art-gallery__cards">
+        <art-card
+          :picture="picture"
+          :index="index"
+          v-for="(picture, index) in getFilteredPictures"
+          :key="picture.id"
+        ></art-card>
+      </transition-group>
     </div>
   </section>
 </template>
 
 <script>
 import ArtCard from "../ui/ArtCard";
-import { mapState, mapMutations } from "vuex";
+import { mapGetters, mapMutations } from "vuex";
 
 export default {
-  components:{
-    ArtCard
+  components: {
+    ArtCard,
   },
   name: "art-galleryView",
-  computed:{
-    ...mapState(['pictures'])
+  computed: {
+    ...mapGetters(["getFilteredPictures"]),
   },
-  methods:{
-      ...mapMutations(['setDefaultData'])
+  methods: {
+    ...mapMutations(["setDefaultData"]),
   },
   created() {
-      this.setDefaultData()
-  }
-
+    this.setDefaultData();
+  },
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-.art-gallery{
-  &__container{
+.art-gallery {
+  &__container {
     margin: 45px 0;
   }
-  &__cards{
+  &__cards {
     margin-top: 39px;
     display: flex;
     justify-content: space-between;
   }
-
+  &__cards + &__cards {
+    margin-left: 20px;
+  }
 }
 </style>
